@@ -19,6 +19,17 @@ function App() {
     getData()
   }, []) // Onload only - just empty array
 
+
+// NEED SOMEWAY TO FILTER THROUGH THE LIST OF AVAILABLE DATES
+  // let available
+  // if (data.partners.availableDates) {
+  //   available = data.partners.availableDates.filter(date => {
+  //     return (
+  //       <p>{date}</p>
+  //     )
+  //   })
+  // }
+
   // Format the data for the results
   let dates = data.partners.map((p, i) => {
     return (
@@ -50,6 +61,7 @@ function App() {
       <h1>Hubspot Challenge</h1>
         <div>
           {dates}
+          {/* {available} */}
         </div>
     </div>
   );

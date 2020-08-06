@@ -1,10 +1,11 @@
+
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import './App.css';
 
 function App() {
 
-  let [data, setData] = useState({ hits: [] })
+  let [data, setData] = useState({ partners: [] })
 
   // API call via useEffect
   useEffect(() => {
@@ -14,17 +15,33 @@ function App() {
       console.log('Results:', results.data)
       setData(results.data)
     }
-
     // Call the function
     getData()
   }, []) // Onload only - just empty array
 
   // Format the data for the results
-  let dates = data.hits.map((hit, i) => {
+  let dates = data.partners.map((p, i) => {
     return (
-      <li key={i}>
-        {hit.partners.availableDates}
-      </li>
+      <div key={i}>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>Available Dates</th>
+            </tr>
+          </thead>
+            <tbody>
+              <td>{p.firstName}</td>
+              <td>{p.lastName}</td>
+              <td>{p.email}</td>
+              <td>{p.country}</td>
+              <td>{p.availableDates}</td>
+            </tbody>
+        </table>
+      </div>
     )
   }) 
 

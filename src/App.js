@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import './App.css';
 
 function App() {
+
+  let [data, setData] = useState({ hits: [] })
+
+  // API call via useEffect
+  useEffect(() => {
+    // Define a function to get the data
+    const getData = async () => {
+      let results = await Axios('https://candidate.hubteam.com/candidateTest/v3/problem/dataset?userKey=52bd2af9be7e3ae4e73d12de6325')
+      console.log('Results:', results.data)
+      setData(results.data)
+    }
+
+    // Call the function
+    getData()
+  }, []) // Onload only - just empty array
+
+  // Format the data for the results
+  let dates = data.hits.map((hit, i) => {
+    return (
+      <li key={i}>
+        {hit.partners.availableDates}
+      </li>
+    )
+  }) 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hubspot Challenge</h1>
+        <div>
+          {dates}
+        </div>
     </div>
   );
 }
